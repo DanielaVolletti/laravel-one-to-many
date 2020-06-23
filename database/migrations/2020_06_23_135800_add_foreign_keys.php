@@ -21,7 +21,7 @@ class AddForeignKeys extends Migration
                     -> onDelete('cascade');
          });
          Schema::table('employee_location', function (Blueprint $table) {
-             $table -> foreign('employee_id', 'employee')
+             $table -> foreign('employee_id', 'employe')
                     -> references('id')
                     -> on ('employees')
                     -> onDelete('cascade');
@@ -44,7 +44,7 @@ class AddForeignKeys extends Migration
              $table -> dropForeign('employee');
          });
          Schema::table('employee_location', function (Blueprint $table) {
-             $table -> dropForeign('employee');
+             $table -> dropForeign('employe');
              $table -> dropForeign('location');
          });
      }
