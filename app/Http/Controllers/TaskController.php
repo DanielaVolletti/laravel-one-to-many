@@ -21,7 +21,24 @@ class TaskController extends Controller
       return view('edit-task', compact('task', 'employees', 'locations'));
     }
     public function update(Request $request, $id) {
-      
+      $validateData = $request -> validate([
+        'name' => 'required',
+        'description' => 'required',
+        'deadline' => 'required',
+        'employee_id' => 'required',
+        'locations' => 'required|array'
+      ]);
+
+      $task = Task::findOrFail($id);
+      $employee = $task -> employee;
+      $task -> name = $validateData['name'];
+      $task -> description = $validateData['description'];
+      $task -> deadline = $validateData['deadline'];
+      $task -> employee_id = $validateData['employee_id'];
+      $task -> save();
+
+      $employee -> locations() -> sync($validateData['locations']);
+
       return redirect() -> route('home');
     }
 }
