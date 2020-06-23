@@ -17,16 +17,11 @@ class TaskController extends Controller
     public function edit($id) {
       $task = Task::findOrFail($id);
       $employees = Employee::all();
-      return view('edit-task', compact('task', 'employees'));
+      $locations = Location::all();
+      return view('edit-task', compact('task', 'employees', 'locations'));
     }
     public function update(Request $request, $id) {
-      $validateData = $request -> validate([
-        'name' => 'required',
-        'description' => 'required',
-        'deadline' => 'required',
-        'employee_id' => 'required'
-      ]);
-      Task::whereId($id) -> update($validateData);
+      
       return redirect() -> route('home');
     }
 }

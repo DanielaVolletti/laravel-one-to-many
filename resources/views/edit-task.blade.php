@@ -27,6 +27,21 @@
     <label for="deadline">DEADLINE</label>
     <input type="text" name="deadline" value="{{$task -> deadline}}">
     <br>
+
+    <h3>LOCATIONS</h3>
+    <label for="locations[]"></label>
+    @foreach ($locations as $location)
+      <input type="checkbox" name="locations[]" value="{{$location -> id}}"
+        @foreach ($task -> employee -> locations as $employeeLocation)
+          @if ($location -> id === $employeeLocation -> id)
+            checked
+          @endif
+        @endforeach
+
+      >
+      {{$location -> street}} <br>
+    @endforeach
+
     <input type="submit" name="submit" value="UPDATE">
   </form>
 @endsection

@@ -17,8 +17,9 @@
           @foreach ($task -> employee -> locations as $location)
             <b>LOCATION: </b>
             {{$location -> street}},
-            {{$location -> city}} 
+            {{$location -> city}}
             ({{$location -> state}}).
+            <br>
           @endforeach
         </p>
       </li>
